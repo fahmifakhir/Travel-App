@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "634129156201",
+    "project_id": "travel-app-67be1",
+    "storage_bucket": "travel-app-67be1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634129156201:android:2d5f7ef5da5163df05baf8",
+        "android_client_info": {
+          "package_name": "com.fahmy.airplane"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgmuQ5wUXFqkHVG33D05RgH8F2OwHgHSQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
