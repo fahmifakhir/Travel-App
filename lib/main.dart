@@ -7,15 +7,18 @@ import 'package:airplane/ui/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-        apiKey: "AIzaSyAgmuQ5wUXFqkHVG33D05RgH8F2OwHgHSQ",
-        appId: "1:634129156201:android:2d5f7ef5da5163df05baf8",
-        messagingSenderId: "634129156201",
-        projectId: "travel-app-67be1"),
+    options: FirebaseOptions(
+      apiKey: dotenv.env['APIKEY']!,
+      appId: dotenv.env['APPID']!,
+      messagingSenderId: dotenv.env['MESSAGESENDERID']!,
+      projectId: dotenv.env['PROJECTID']!,
+    ),
   );
 
   runApp(const MyApp());
