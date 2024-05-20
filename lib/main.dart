@@ -1,3 +1,4 @@
+import 'package:airplane/cubit/auth_cubit.dart';
 import 'package:airplane/cubit/page_cubit.dart';
 import 'package:airplane/ui/pages/bonus_page.dart';
 import 'package:airplane/ui/pages/get_started_page.dart';
@@ -12,14 +13,24 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: dotenv.env['APIKEY']!,
-      appId: dotenv.env['APPID']!,
-      messagingSenderId: dotenv.env['MESSAGESENDERID']!,
-      projectId: dotenv.env['PROJECTID']!,
-    ),
-  );
+  // print('APIKEY: ${dotenv.env['APIKEY']}');
+  // print('APPID: ${dotenv.env['APPID']}');
+  // print('MESSAGESENDERID: ${dotenv.env['MESSAGESENDERID']}');
+  // print('PROJECTID: ${dotenv.env['PROJECTID']}');
+
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: dotenv.env['APIKEY']!,
+        appId: dotenv.env['APPID']!,
+        messagingSenderId: dotenv.env['MESSAGESENDERID']!,
+        projectId: dotenv.env['PROJECTID']!,
+      ),
+    );
+    print('Firebase initialization successful');
+  } catch (e) {
+    print('Firebase initialization failed: $e');
+  }
 
   runApp(const MyApp());
 }
@@ -27,13 +38,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => PageCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(),
         )
       ],
       child: MaterialApp(
