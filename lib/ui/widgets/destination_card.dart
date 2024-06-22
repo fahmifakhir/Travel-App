@@ -1,19 +1,14 @@
+import 'package:airplane/models/destination_model.dart';
 import 'package:airplane/shared/theme.dart';
 import 'package:airplane/ui/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class DestinationCard extends StatelessWidget {
-  final String name;
-  final String city;
-  final String imageUrl;
-  final double rating;
+  final DestinationModel destinations;
 
-  const DestinationCard({
+  const DestinationCard(
+    this.destinations, {
     super.key,
-    required this.name,
-    required this.city,
-    required this.imageUrl,
-    this.rating = 0,
   });
 
   @override
@@ -23,7 +18,7 @@ class DestinationCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailPage(),
+            builder: (context) => DetailPage(destinations),
           ),
         );
       },
@@ -49,7 +44,7 @@ class DestinationCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(imageUrl),
+                  image: NetworkImage(destinations.imageUrl),
                 ),
               ),
               child: Align(
@@ -78,7 +73,7 @@ class DestinationCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        rating.toString(),
+                        destinations.rating.toString(),
                         style: blackTextStyle.copyWith(
                           fontWeight: medium,
                         ),
@@ -94,7 +89,7 @@ class DestinationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    destinations.name,
                     style: blackTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: medium,
@@ -102,7 +97,7 @@ class DestinationCard extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    city,
+                    destinations.city,
                     style: greyTextStyle.copyWith(
                       fontWeight: light,
                     ),
