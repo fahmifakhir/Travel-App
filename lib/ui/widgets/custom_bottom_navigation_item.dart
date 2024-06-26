@@ -7,8 +7,11 @@ class CustomBottomNavigationItem extends StatelessWidget {
   final int index;
   final String imageUrl;
 
-  const CustomBottomNavigationItem(
-      {required this.imageUrl, super.key, required this.index});
+  const CustomBottomNavigationItem({
+    required this.imageUrl,
+    super.key,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,29 +19,29 @@ class CustomBottomNavigationItem extends StatelessWidget {
       onTap: () {
         context.read<PageCubit>().setPage(index);
       },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(),
-          Image.asset(
-            imageUrl,
-            width: 24,
-            height: 24,
-            color: context.read<PageCubit>().state == index
-                ? kPrimaryColor
-                : kGreyColor,
-          ),
-          Container(
-            height: 2,
-            width: 30,
-            decoration: BoxDecoration(
-              color: context.read<PageCubit>().state == index
-                  ? kPrimaryColor
-                  : kTransparentColor,
-              borderRadius: BorderRadiusDirectional.circular(defaultRadius),
-            ),
-          )
-        ],
+      child: BlocBuilder<PageCubit, int>(
+        builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(),
+              Image.asset(
+                imageUrl,
+                width: 24,
+                height: 24,
+                color: state == index ? kPrimaryColor : kGreyColor,
+              ),
+              Container(
+                height: 2,
+                width: 30,
+                decoration: BoxDecoration(
+                  color: state == index ? kPrimaryColor : kTransparentColor,
+                  borderRadius: BorderRadiusDirectional.circular(defaultRadius),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

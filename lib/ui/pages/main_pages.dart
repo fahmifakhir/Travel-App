@@ -16,15 +16,15 @@ class MainPage extends StatelessWidget {
     Widget buidContent(int currentIndex) {
       switch (currentIndex) {
         case 0:
-          return HomePage();
+          return const HomePage();
         case 1:
-          return TransactionPage();
+          return const TransactionPage();
         case 2:
-          return WalletPage();
+          return const WalletPage();
         case 3:
-          return SettingPage();
+          return const SettingPage();
         default:
-          return HomePage();
+          return const HomePage();
       }
     }
 
@@ -43,7 +43,7 @@ class MainPage extends StatelessWidget {
             color: kWhiteColor,
             borderRadius: BorderRadius.circular(defaultRadius),
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomBottomNavigationItem(
